@@ -4,8 +4,11 @@ using TaskTracker.Models;
 
 namespace TaskTracker.Services
 {
+
     public class TaskService
     {
+
+
         private List<TaskItem> tasks;
         private int nextId;
 
@@ -106,6 +109,19 @@ namespace TaskTracker.Services
             int total = tasks.Count;
             int doneCount = GetTasksByStatus(TaskStatus.Done).Count;
             return $"Всего задач: {total}, Завершено: {doneCount}";
+        }
+
+        public List<TaskItem> GetTasksByPriority(TaskPriority priority)
+        {
+            List<TaskItem> result = new List<TaskItem>();
+            for (int i = 0; i < tasks.Count; i++)
+            {
+                if (tasks[i].Priority == priority)
+                {
+                    result.Add(tasks[i]);
+                }
+            }
+            return result;
         }
     }
 }
